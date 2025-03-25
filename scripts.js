@@ -11,7 +11,7 @@ document.getElementById("fetchData").addEventListener("click", async function() 
         tableBody.innerHTML = ""; // Clear table before inserting new data
 
         for (const username of usernames) {
-            const habboApiUrl = `https://www.habbo.com/api/public/users?name=${username}`;
+            const habboApiUrl = `https://www.habbo.com/api/public/users?name=${encodeURIComponent(username)}`;
             const userResponse = await fetch(habboApiUrl);
 
             if (userResponse.status == 404) {
