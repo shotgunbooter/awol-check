@@ -19,6 +19,16 @@ button {
     margin-top: 10px;
 }
 
+input {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
 button:hover {
     background-color: #0e6ec5;
 }
@@ -41,4 +51,9 @@ th {
 .awol {
     background-color: #ff4c4c;
     color: white;
+}
+
+hr.rounded {
+    border-top: 8px #333;
+    border-radius: 5px;
 }

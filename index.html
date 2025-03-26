@@ -7,7 +7,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <class="container">
+        <h1>Manual AWOL Check</h1>
+        <input type="text" id="manual-input" placeholder="Enter a username">
+        <button id="manual-check">Manual Check</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Days Since Login</th>
+                </tr>
+            </thead>
+            <tbody id="manual-resutls"></tbody>
+        </table>
+
+        <hr class="rounded">
+
         <h1>Select an Entity to Check AWOLs of</h1>
         <p>Usernames list last updated: 26/03/2025 (GMT +10)</p>
         <button id="fetchData">Canadian Army</button>
@@ -22,6 +38,5 @@
         </table>
     </div>
     <script src="scripts.js"></script>
-    <p>Not built with ❤ by floppidity</p>
 </body>
 </html>
