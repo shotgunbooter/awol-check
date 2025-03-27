@@ -21,6 +21,13 @@ document.getElementById("fetchData").addEventListener("click", async function() 
                     <td class="invalid-username">User does not exist on habbo!</td>
                 `;
                 tableBody.appendChild(row);
+            } else if (userResponse.status == 503) {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${username}</td>
+                    <td class="maintenance">Habbo is under maintenance, Try later.</td>
+                `;
+                tableBody.appendChild(row);
             } else {
                 const userData = await userResponse.json();
                 
