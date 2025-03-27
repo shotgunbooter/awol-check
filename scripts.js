@@ -1,5 +1,5 @@
 document.getElementById("fetchData").addEventListener("click", async function() {
-    const githubRawUrl = "https://raw.githubusercontent.com/shotgunbooter/username-list/refs/heads/main/names.txt"; 
+    const githubRawUrl = "https://raw.githubusercontent.com/shotgunbooter/awol-check/refs/heads/main/names.txt"; 
     const tableBody = document.getElementById("results");
 
     try {
