@@ -127,7 +127,7 @@ document.getElementById("validate-bgc").addEventListener("click", async function
 
         const jsonData = match[1].replace(/&quot;/g, '"');
         const userData = JSON.parse(jsonData);
-        // console.log("Extracted JSON Data:", userData);
+        console.log("Extracted JSON Data:", userData);
 
         let hasSubmittedBGC = "Unknown";
         let bgcAccepted = "Unknown";
@@ -151,3 +151,4 @@ document.getElementById("validate-bgc").addEventListener("click", async function
         console.error("Error fetching data:", error);
     }
 });
+
