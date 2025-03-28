@@ -28,6 +28,8 @@ document.getElementById("fetchData").addEventListener("click", async function() 
                     <td class="maintenance">Habbo is under maintenance, Try later.</td>
                 `;
                 tableBody.appendChild(row);
+                alert("Habbo is undergoing maintenance, Try again later.")
+                break;
             } else {
                 const userData = await userResponse.json();
                 
@@ -82,6 +84,69 @@ document.getElementById("manual-check").addEventListener("click", async function
                 tableBody.appendChild(row);
             }
         }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+});
+
+/* 
+################
+BGC VALIDATOR
+################
+*/
+document.getElementById("validate-bgc").addEventListener("click", async function () {
+    const tableBody = document.getElementById("bgc-results");
+    const username = document.getElementById("bgc-input").value;
+
+    try {
+        tableBody.innerHTML = "";
+
+        // list for fuuture: https://corsproxy.io/
+        // https://nordicapis.com/10-free-to-use-cors-proxies/
+        const habboApiUrl = `https://corsproxy.io/?url=https://habbo-ca.com/personnel/${encodeURIComponent(username)}`;
+        const userResponse = await fetch(habboApiUrl);
+
+        if (userResponse.status === 404 || userResponse.status === 400) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${username}</td>
+                <td class="invalid-username">User does not exist on CAF PTS</td>
+                <td class="invalid-username">-</td>
+            `;
+            tableBody.appendChild(row);
+            return;
+        }
+
+        const htmlText = await userResponse.text();
+
+        const match = htmlText.match(/<div id="app"[^>]*data-page="([^"]+)"/);
+        if (!match || !match[1]) {
+            console.error("data-page attribute not found in response");
+            return;
+        }
+
+        const jsonData = match[1].replace(/&quot;/g, '"');
+        const userData = JSON.parse(jsonData);
+        console.log("Extracted JSON Data:", userData);
+
+        let hasSubmittedBGC = "Unknown";
+        let bgcAccepted = "Unknown";
+
+        if (userData.props.person) {
+            hasSubmittedBGC = userData.props.person.has_submitted_bgc === 1 ? "True" : "False";
+            bgcAccepted = userData.props.person.background_check_id !== null ? "True" : "False";
+        } else {
+            console.error("Invalid response structure, 'person' key missing.");
+        }
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${username}</td>
+            <td class="bgc-submitted-field">${hasSubmittedBGC}</td>
+            <td class="bgc-accepted-field">${bgcAccepted}</td>
+        `;
+        tableBody.appendChild(row);
+
     } catch (error) {
         console.error("Error fetching data:", error);
     }
