@@ -53,6 +53,11 @@ th {
     color: white;
 }
 
+.motto-highlight {
+    background-color: #FFC94D;
+    color: #000000;
+}
+
 hr.rounded {
     border-top: 8px #333;
     border-radius: 5px;

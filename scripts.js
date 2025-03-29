@@ -18,6 +18,7 @@ document.getElementById("fetchData").addEventListener("click", async function() 
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${username}</td>
+                    <td></td>
                     <td class="invalid-username">User does not exist on habbo!</td>
                 `;
                 tableBody.appendChild(row);
@@ -25,6 +26,7 @@ document.getElementById("fetchData").addEventListener("click", async function() 
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${username}</td>
+                    <td></td>
                     <td class="maintenance">Habbo is under maintenance, Try later.</td>
                 `;
                 tableBody.appendChild(row);
@@ -36,10 +38,12 @@ document.getElementById("fetchData").addEventListener("click", async function() 
                 if (userData.lastAccessTime) {
                     const lastLogin = new Date(userData.lastAccessTime);
                     const daysSinceLogin = Math.floor((Date.now() - lastLogin) / (1000 * 60 * 60 * 24));
-                    
+                    const mottoClass = userData.motto.includes("RCN") || userData.motto.includes("CA") ? "" : "motto-highlight";
                     const row = document.createElement("tr");
+
                     row.innerHTML = `
                     <td>${username}</td>
+                    <td class="${mottoClass}">${userData.motto}</td>
                     <td class="${daysSinceLogin > 10 ? 'awol' : ''}">${daysSinceLogin}</td>
                     `;
                     tableBody.appendChild(row);
@@ -61,11 +65,11 @@ document.getElementById("manual-check").addEventListener("click", async function
 
         const habboApiUrl = `https://www.habbo.com/api/public/users?name=${encodeURIComponent(username)}`;
         const userResponse = await fetch(habboApiUrl);
-
+        
         if (userResponse.status == 404 || userResponse.status == 400) {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${username}</td>
+            <td>${username}</td>
                 <td class="invalid-username">User does not exist on habbo!</td>
             `;
             tableBody.appendChild(row);
