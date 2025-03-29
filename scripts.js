@@ -134,7 +134,7 @@ document.getElementById("validate-bgc").addEventListener("click", async function
 
         if (userData.props.person) {
             hasSubmittedBGC = userData.props.person.has_submitted_bgc === 1 ? "True" : "False";
-            bgcAccepted = userData.props.person.background_check_id !== null ? "True" : "False";
+            bgcAccepted = userData.props.person.background_check_id;
         } else {
             console.error("Invalid response structure, 'person' key missing.");
         }
