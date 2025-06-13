@@ -45,6 +45,7 @@
         <input type="text" id="bgc-input" placeholder="Enter a username">
         <button id="validate-bgc">Check</button>
         <p>Having a BGC ID does not mean they've passed their BGC.</p>
+        <p>It might take up to 10 seconds to get the results</p>
         <table>
             <thead>
                 <tr>
@@ -56,6 +57,22 @@
             <tbody id="bgc-results"></tbody>
         </table>
     </div>
+
+    <hr class="rounded">
+
+    <h1>Check for BOS / NP</h1>
+    <input type="text" id="bos-manual-input" placeholder="Enter a username">
+    <button id="bos-manual-check">Check</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Agency</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody id="bos-results"></tbody>
+    </table>
+
     <script src="scripts.js"></script>
 </body>
 </html>
