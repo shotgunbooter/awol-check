@@ -390,11 +390,44 @@ document.getElementById("bos-manual-check").addEventListener("click", async func
                 if (entry.toLowerCase().includes(usernameInput.toLowerCase())) {
                     const row = document.createElement("tr");
                     row.innerHTML = `
+                        <td>${usernameInput}</td>
                         <td>${agency}</td>
-                        <td><a href="${link}" target="_blank">${agency}</a></td>
+                        <td><a href="${link}" target="_blank">${link}</a></td>
                     `;
                     tableBody.appendChild(row);
-                    found = true;
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Error during BOS check:", error);
+    }
+});
+
+
+
+document.getElementById("bos-auto-check").addEventListener("click", async function () {
+    const tableBody = document.getElementById("bos-results");
+    const githubRawUrl = "https://raw.githubusercontent.com/shotgunbooter/awol-check/refs/heads/main/names.txt"; 
+    const response = await fetch(githubRawUrl);
+    const data = await response.text();
+    const usernamelist = data.split("\n").map(name => name.trim()).filter(name => name);
+
+    try {
+        for (const username of usernamelist) {
+            for (const agency in boslist) {
+                const { link, usernames } = boslist[agency];
+    
+                for (const entry of usernames) {
+                    //console.log(`checking "${usernameInput}" against "${entry}"`); // debugging , early stage
+                    if (entry.toLowerCase().includes(username.toLowerCase())) {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${username}</td>
+                            <td>${agency}</td>
+                            <td><a href="${link}" target="_blank">${link}</a></td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
                 }
             }
         }

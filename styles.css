@@ -10,7 +10,7 @@ body {
 }
 
 button {
-    background-color: #1f8ef1;
+    background-color: #EE0000;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -30,7 +30,7 @@ input {
 }
 
 button:hover {
-    background-color: #0e6ec5;
+    background-color: #EE0000;
 }
 
 table {
@@ -61,4 +61,16 @@ th {
 hr.rounded {
     border-top: 8px #333;
     border-radius: 5px;
+}
+
+a:link {
+  color: #ff4c4c;
+}
+
+a:visited {
+  color: #ff4c4c;
+}
+
+a:hover {
+  color: #ff4c4c;
 }
